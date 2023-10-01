@@ -1,0 +1,16 @@
+.header {
+  width: 30%;
+  margin: 10% 0 0 10%;
+  position: fixed;
+}
+
+.header__navs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header__nav {
+  border: gray solid 0.1px;
+  padding: 10px;
+}
