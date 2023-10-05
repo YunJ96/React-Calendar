@@ -1,0 +1,120 @@
+.diary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.react-calendar {
+  width: 40%;
+  max-width: 100%;
+  height: 350px;
+  background: white;
+  border: 1px solid #ff6f61;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.125em;
+}
+
+.react-calendar,
+.react-calendar *,
+.react-calendar *:before,
+.react-calendar *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.react-calendar button {
+  margin: 0;
+  border: 0;
+  outline: none;
+}
+
+.react-calendar button:enabled:hover {
+  cursor: pointer;
+}
+
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.75em;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  padding: 0.5em;
+}
+
+.react-calendar__month-view__weekNumbers .react-calendar__tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75em;
+  font-weight: bold;
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: #d10000;
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #bbbbbb;
+}
+
+.react-calendar__year-view .react-calendar__tile,
+.react-calendar__decade-view .react-calendar__tile,
+.react-calendar__century-view .react-calendar__tile {
+  padding: 2em 0.5em;
+}
+
+.react-calendar__tile {
+  max-width: 100%;
+  padding: 10px 6.6667px;
+  background: none;
+  text-align: center;
+  line-height: 16px;
+}
+
+.react-calendar__tile:disabled {
+  background-color: #e6e6e6;
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background-color: #e6e6e6;
+}
+
+.react-calendar__tile--now {
+  background: #ffc0cb;
+  color: white;
+}
+
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
+  background: #ffc0cb;
+}
+
+.react-calendar__tile--hasActive {
+  background: #ffc0cb;
+}
+
+.react-calendar__tile--hasActive:enabled:focus {
+  background: #ff6f61;
+  color: white;
+}
+
+.react-calendar__tile--active {
+  background: #ff6f61;
+  color: white;
+}
+
+.react-calendar__tile--active:enabled:focus {
+  background: #ff6f61;
+  color: white;
+}
+
+.todo {
+  width: 200px;
+  height: 349px;
+  border: 1px solid #ff6f61;
+  border-left: 0;
+}
