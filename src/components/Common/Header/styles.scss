@@ -1,0 +1,15 @@
+.header {
+  width: 65%;
+  margin: 80px auto;
+  .header__navs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 10px;
+    border-bottom: solid 0.1px;
+    .header__nav {
+      padding: 10px;
+      cursor: pointer;
+    }
+  }
+}

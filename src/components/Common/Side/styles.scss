@@ -1,0 +1,48 @@
+.side-content {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 263px;
+  .sideNav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 220px;
+    height: 130px;
+    border: double #ff6f61;
+    border-radius: 5px;
+    .side-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80px;
+      height: 80px;
+      border: solid 1px gray;
+      border-radius: 100%;
+    }
+    .sideNav__buttons {
+      display: flex;
+      flex-direction: column;
+      button {
+        width: 80px;
+        height: 30px;
+        margin: 5px;
+        background-color: #ff6f61;
+        color: white;
+        font-size: 15px;
+        font-weight: bold;
+      }
+    }
+  }
+  .sideMenu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    width: 220px;
+    height: 175px;
+    border: double #ff6f61;
+    border-radius: 5px;
+  }
+}

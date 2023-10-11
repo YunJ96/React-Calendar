@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import style from './Login.modules.scss';
+import './Login.modules.scss';
 
 const User = {
   email: 'test@gmail.com',

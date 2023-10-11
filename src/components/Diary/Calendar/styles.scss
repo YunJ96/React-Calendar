@@ -1,17 +1,27 @@
-.diary {
+.calendar-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .react-calendar {
-  width: 40%;
-  max-width: 100%;
-  height: 350px;
+  width: 100%;
+  max-width: 500px;
+  height: 100%;
+  padding: 1%;
   background: white;
-  border: 1px solid #ff6f61;
+  border: none;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;
+  button {
+    font-size: 20px;
+    margin: 0;
+    border: 0;
+    outline: none;
+  }
+  button:enabled:hover {
+    cursor: pointer;
+  }
 }
 
 .react-calendar,
@@ -23,21 +33,11 @@
   box-sizing: border-box;
 }
 
-.react-calendar button {
-  margin: 0;
-  border: 0;
-  outline: none;
-}
-
-.react-calendar button:enabled:hover {
-  cursor: pointer;
-}
-
 .react-calendar__month-view__weekdays {
   text-align: center;
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 0.75em;
+  font-size: 1.2em;
 }
 
 .react-calendar__month-view__weekdays__weekday {
@@ -48,7 +48,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.75em;
+  font-size: 0.9em;
   font-weight: bold;
 }
 
@@ -112,9 +112,6 @@
   color: white;
 }
 
-.todo {
-  width: 200px;
-  height: 349px;
-  border: 1px solid #ff6f61;
-  border-left: 0;
+abbr[title] {
+  text-decoration: none;
 }

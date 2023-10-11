@@ -9,7 +9,9 @@ function Header() {
     <div>
       <nav className='header'>
         <div className='header__navs'>
-          <span className='header__nav'>Home</span>
+          <span className='header__nav' onClick={() => navigate('/')}>
+            Home
+          </span>
           <span className='header__nav' onClick={() => navigate('/diary')}>
             Calendar
           </span>

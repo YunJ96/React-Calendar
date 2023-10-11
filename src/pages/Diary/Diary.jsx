@@ -1,9 +1,16 @@
-import Calendar from '../../components/Calendar';
+import SideNav from '../../components/Common/Side';
+import Calendar from '../../components/Diary/Calendar';
+import Todo from '../../components/Diary/Todo';
+import './Diary.modules.scss';
 
 function Diary() {
   return (
     <div>
-      <Calendar />
+      <div className='diary-wrap'>
+        <SideNav />
+        <Calendar />
+        <Todo />
+      </div>
     </div>
   );
 }
