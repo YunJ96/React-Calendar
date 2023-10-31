@@ -1,6 +1,6 @@
-import { userService } from '../services';
-import { setUserToken } from '../utils/jwt';
-import { User } from '../models';
+import userService from '../services/userService.js';
+import setUserToken from '../utils/jwt.js';
+import { User } from '../models/index.js';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 
@@ -10,13 +10,13 @@ const userController = {
   async registerUser(req, res) {
     try {
       const { password, name, email } = req.body;
-      const registeredEmail = await this.userService.getUserByEmail(email);
-
+      const registeredEmail = await userService.getUserByEmail(email);
+      W;
       if (registeredEmail) {
         return res.status(500).json({ error: error.message });
       }
 
-      const user = await this.userService.registerUser(email, password, name);
+      const user = await userService.registerUser(email, password, name);
       res
         .status(200)
         .message('회원가입이 정상적으로 이루어졌습니다.')
@@ -28,7 +28,7 @@ const userController = {
   async loginUser(req, res) {
     try {
       const { id, password } = req.body;
-      const { accessToken, refreshToken } = await this.userService.loginUser(
+      const { accessToken, refreshToken } = await userService.loginUser(
         id,
         password
       );

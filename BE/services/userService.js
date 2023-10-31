@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
-import { hashPassword } from '../utils/hashPassword';
-import { User } from '../models';
-import { setUserToken } from '../utils/jwt';
+import hashPassword from '../utils/hashPassword.js';
+import { User } from '../models/index.js';
+import setUserToken from '../utils/jwt.js';
 
 const userService = {
   //유저 회원가입

@@ -1,8 +1,6 @@
 import passport from 'passport';
-import userService from '../services/userService';
-import { User } from '../models';
-
-const userService = new UserService();
+import userService from '../services/userService.js';
+import { User } from '../models/index.js';
 
 const refreshTokenMiddleware = async (req, res, next) => {
   passport.authenticate('refresh', { session: false }, async (error, user) => {

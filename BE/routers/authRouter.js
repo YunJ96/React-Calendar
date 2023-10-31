@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import userController from '../controller/userController';
-import authAccess from '../middlewares/authAccess';
-import authRefresh from '../middlewares/authRefresh';
+import userController from '../controller/userController.js';
+import authAccess from '../middlewares/authAccess.js';
+import authRefresh from '../middlewares/authRefresh.js';
 
 const authRouter = Router();
 
