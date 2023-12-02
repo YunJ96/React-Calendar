@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles.scss';
 import { useNavigate } from 'react-router-dom';
+import weatherApi from '../../../api/weather.js';
 
 function Header() {
   const navigate = useNavigate();
+  const [temp, setTemp] = useState(null);
+  const [weather, setWeather] = useState(null);
+
+  useEffect(() => {
+    const callWeatherApi = async () => {
+      try {
+        const response = await weatherApi();
+        setTemp(response[0]);
+        setWeather(response[1]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    callWeatherApi();
+  }, []);
 
   return (
     <div>
@@ -15,12 +31,16 @@ function Header() {
           <span className='header__nav' onClick={() => navigate('/diary')}>
             Calendar
           </span>
-          <span className='header__nav' onClick={() => navigate('/login')}>
+          <span className='header__nav' onClick={() => navigate('/myPage')}>
             My Page
           </span>
           <div className='header__nav'>
-            <span>회원정보</span>
-            <span className='header__nav'>날씨</span>
+            {
+              <div>
+                <span>{temp}°C</span>
+                <span>{weather}</span>
+              </div>
+            }
           </div>
         </div>
       </nav>

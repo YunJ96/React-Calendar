@@ -2,6 +2,7 @@ import Home from './pages/Home/Home';
 import Diary from './pages/Diary/Diary';
 import Login from './pages/Login/Login';
 import Join from './pages/Join/Join';
+import MyPage from './pages/MyPage/MyPage';
 
 export const protectedRoutes = [
   {
@@ -21,6 +22,10 @@ export const routes = [
   {
     path: '/join',
     element: <Join />,
+  },
+  {
+    path: '/myPage',
+    element: <MyPage />,
   },
   // {
   //   path: '/find_id',

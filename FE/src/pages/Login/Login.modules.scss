@@ -8,26 +8,26 @@
   z-index: 0;
 }
 
-.titleWrap {
+.title-wrap {
   margin: auto;
   font-size: 30px;
   font-weight: 700;
   color: #262626;
 }
 
-.contentWrap {
+.content-wrap {
   margin-top: 26px;
   flex: 1;
 }
 
-.inputTitle {
+.input-title {
   margin-top: 26px;
   font-size: 20px;
   font-weight: 600;
   color: #262626;
 }
 
-.inputWrap {
+.input-wrap {
   display: flex;
   border-radius: 8px;
   padding: 16px;
@@ -36,7 +36,7 @@
   border: 1px solid #e2e0e0;
 }
 
-.inputWrap:focus-within {
+.input-wrap:focus-within {
   border: 1px solid #ff6f61;
 }
 
@@ -53,7 +53,7 @@
   color: #dadada;
 }
 
-.errorMessageWrap {
+.errorMessage-wrap {
   margin-top: 8px;
   color: #ef0000;
   font-size: 12px;

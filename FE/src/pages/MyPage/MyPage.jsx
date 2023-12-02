@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import SideNav from '../../components/Common/Side';
 import '../Login/Login.modules.scss';
+import './MyPage.modules.scss';
 
-function Join() {
+function MyPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
@@ -13,8 +14,6 @@ function Join() {
   const [pwValid, setPwValid] = useState(false);
   const [pwConfirmValid, setPwConfirmValid] = useState(false);
   const [notAllow, setNotAllow] = useState(true);
-
-  const navigate = useNavigate();
 
   const handleName = (e) => {
     const inputValue = e.target.value;
@@ -68,7 +67,7 @@ function Join() {
     e.preventDefault();
 
     if (nameValid && emailValid && pwValid && pwConfirmValid) {
-      navigate('/');
+      alert('회원정보가 수정되었습니다.');
     } else {
       alert('회원정보를 정확히 입력해주세요.');
     }
@@ -83,9 +82,8 @@ function Join() {
   }, [nameValid, emailValid, pwValid, pwConfirmValid]);
 
   return (
-    <div className='page'>
-      <div className='title-wrap'>Join Us!</div>
-
+    <div className='myPage-wrap'>
+      <SideNav />
       <form action='submit' onSubmit={handleSubmit}>
         <div className='content-wrap'>
           <div className='input-title'>Name</div>
@@ -112,7 +110,7 @@ function Join() {
             <input
               type='text'
               className='input'
-              placeholder='test@gmail.com'
+              placeholder='E-mail을 입력해주세요.'
               value={email}
               onChange={handleEmail}
             />
@@ -130,7 +128,7 @@ function Join() {
             <input
               type='password'
               className='input'
-              placeholder='영문, 숫자, 특수문자 포함 10자 이상'
+              placeholder='********'
               value={pw}
               onChange={handlePassword}
             />
@@ -148,7 +146,7 @@ function Join() {
             <input
               type='password'
               className='input'
-              placeholder='비밀번호를 확인해주세요.'
+              placeholder='********'
               value={pwConfirm}
               onChange={handlePasswordConfirm}
             />
@@ -165,10 +163,10 @@ function Join() {
           <button
             style={{ marginTop: '30px' }}
             disabled={notAllow}
-            id='joinButton'
+            id='modifyButton'
             className='bottomButtons'
           >
-            Join
+            정보 수정
           </button>
         </div>
       </form>
@@ -176,4 +174,4 @@ function Join() {
   );
 }
 
-export default Join;
+export default MyPage;

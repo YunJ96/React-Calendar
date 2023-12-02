@@ -1,5 +1,3 @@
-// Diary.jsx
-
 import React, { useState } from 'react';
 import SideNav from '../../components/Common/Side';
 import Calendar from '../../components/Diary/Calendar';

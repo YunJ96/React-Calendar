@@ -9,7 +9,7 @@ function Diary({ onDateClick }) {
     <div className='calendar-wrap'>
       <Calendar
         className='calendar'
-        calendarType='US'
+        calendarType='gregory'
         locale='en-HU'
         next2Label={null}
         prev2Label={null}

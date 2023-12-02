@@ -59,12 +59,12 @@ function Login() {
 
   return (
     <div className='page'>
-      <div className='titleWrap'>Welcome!</div>
+      <div className='title-wrap'>Welcome!</div>
 
-      <div className='contentWrap'>
-        <div className='inputTitle'>E-mail</div>
+      <div className='content-wrap'>
+        <div className='input-title'>E-mail</div>
 
-        <div className='inputWrap'>
+        <div className='input-wrap'>
           <input
             type='text'
             className='input'
@@ -74,7 +74,7 @@ function Login() {
           />
         </div>
 
-        <div className='errorMessageWrap'>
+        <div className='errorMessage-wrap'>
           {!emailValid && email.length > 0 && (
             <div>올바른 아이디를 입력해주세요.</div>
           )}
@@ -84,7 +84,7 @@ function Login() {
           Password
         </div>
 
-        <div className='inputWrap'>
+        <div className='input-wrap'>
           <input
             type='password'
             className='input'
@@ -94,7 +94,7 @@ function Login() {
           />
         </div>
 
-        <div className='errorMessageWrap'>
+        <div className='errorMessage-wrap'>
           {!pwValid && pw.length > 0 && (
             <div>영문, 숫자, 특수문자 포함 8자 이상 입력해주세요.</div>
           )}
