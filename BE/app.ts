@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
   res.send('hello express');
 });
 
-app.use((err, req, res, next) => {
+app.use((err: Error, req: Request, res: Response, next: NextFunction): void => {
   console.error(err.stack);
   res.status(500).send('서버 오류.');
 });

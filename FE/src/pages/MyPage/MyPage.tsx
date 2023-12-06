@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import SideNav from '../../components/Common/Side';
 import '../Login/Login.modules.scss';
 import './MyPage.modules.scss';
 
 function MyPage() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [pw, setPw] = useState('');
-  const [pwConfirm, setPwConfirm] = useState('');
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [pw, setPw] = useState<string>('');
+  const [pwConfirm, setPwConfirm] = useState<string>('');
 
-  const [nameValid, setNameValid] = useState(false);
-  const [emailValid, setEmailValid] = useState(false);
-  const [pwValid, setPwValid] = useState(false);
-  const [pwConfirmValid, setPwConfirmValid] = useState(false);
-  const [notAllow, setNotAllow] = useState(true);
+  const [nameValid, setNameValid] = useState<boolean>(false);
+  const [emailValid, setEmailValid] = useState<boolean>(false);
+  const [pwValid, setPwValid] = useState<boolean>(false);
+  const [pwConfirmValid, setPwConfirmValid] = useState<boolean>(false);
+  const [notAllow, setNotAllow] = useState<boolean>(true);
 
-  const handleName = (e) => {
+  const handleName = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     setName(e.target.value);
 
@@ -26,7 +26,7 @@ function MyPage() {
     }
   };
 
-  const handleEmail = (e) => {
+  const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     setEmail(inputValue);
     const regex =
@@ -39,7 +39,7 @@ function MyPage() {
     }
   };
 
-  const handlePassword = (e) => {
+  const handlePassword = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     setPw(inputValue);
     const regex =
@@ -52,7 +52,7 @@ function MyPage() {
     }
   };
 
-  const handlePasswordConfirm = (e) => {
+  const handlePasswordConfirm = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     setPwConfirm(inputValue);
 
@@ -63,7 +63,7 @@ function MyPage() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
     if (nameValid && emailValid && pwValid && pwConfirmValid) {

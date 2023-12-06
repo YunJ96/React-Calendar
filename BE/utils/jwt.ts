@@ -1,10 +1,10 @@
-import jwt from 'jsonwebtoken';
+import { Secret, SignOptions, sign } from 'jsonwebtoken';
+import { User, IUser } from '../models/index';
 import dotenv from 'dotenv';
-import { User } from '../models/index.js';
 
 dotenv.config();
 
-const setUserToken = (user, isOnlyAccess) => {
+const setUserToken = (user: IUser, isOnlyAccess: boolean) => {
   const accessPayload = {
     shortId: user.shortId,
     name: user.name,
@@ -14,10 +14,10 @@ const setUserToken = (user, isOnlyAccess) => {
     // isTempPassword: user.isTempPassword,
   };
   const accessOptions = { algorithm: 'HS256', expiresIn: '1h' };
-  const accessToken = jwt.sign(
+  const accessToken = sign(
     accessPayload,
-    process.env.ACCESSSECRET,
-    accessOptions
+    process.env.ACCESSSECRET as Secret,
+    accessOptions as SignOptions
   );
 
   if (!isOnlyAccess) {
@@ -25,10 +25,10 @@ const setUserToken = (user, isOnlyAccess) => {
       shortId: user.shortId,
     };
     const refreshOptions = { algorithm: 'HS256', expiresIn: '7d' };
-    const refreshToken = jwt.sign(
+    const refreshToken = sign(
       refreshPayload,
-      process.env.REFRESHSECRET,
-      refreshOptions
+      process.env.REFRESHSECRET as Secret,
+      refreshOptions as SignOptions
     );
     User.updateOne(
       { shortId: refreshPayload.shortId },

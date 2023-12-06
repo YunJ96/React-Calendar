@@ -5,17 +5,17 @@ import weatherApi from '../../../api/weather.js';
 
 function Header() {
   const navigate = useNavigate();
-  const [temp, setTemp] = useState(null);
-  const [weather, setWeather] = useState(null);
+  const [temp, setTemp] = useState<number | null>(null);
+  const [weather, setWeather] = useState<string | null>(null);
 
   useEffect(() => {
     const callWeatherApi = async () => {
       try {
-        const response = await weatherApi();
+        const response: any = await weatherApi();
         setTemp(response[0]);
         setWeather(response[1]);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
     callWeatherApi();

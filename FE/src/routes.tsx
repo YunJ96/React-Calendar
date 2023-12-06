@@ -1,3 +1,4 @@
+import React from 'react';
 import Home from './pages/Home/Home';
 import Diary from './pages/Diary/Diary';
 import Login from './pages/Login/Login';

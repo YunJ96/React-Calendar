@@ -5,8 +5,8 @@ import Todo from '../../components/Diary/Todo';
 import './Diary.modules.scss';
 
 function Diary() {
-  const [showTodo, setShowTodo] = useState(false);
-  const [closeTodo, setCloseTodo] = useState(false);
+  const [showTodo, setShowTodo] = useState<boolean>(false);
+  const [closeTodo, setCloseTodo] = useState<boolean>(false);
 
   const handleDateClick = () => {
     setShowTodo(true);

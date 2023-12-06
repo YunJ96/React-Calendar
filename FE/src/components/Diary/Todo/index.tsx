@@ -1,32 +1,41 @@
 import React, { useState } from 'react';
 import './styles.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
-function Todo({ closeTodo, handleCloseTodo }) {
-  const [todoList, setTodoList] = useState([]);
+interface TodoItem {
+  id: number;
+  isCompleted: boolean;
+  value: string;
+}
+
+interface TodoProps {
+  closeTodo: boolean;
+  handleCloseTodo: () => void;
+}
+
+function Todo({ closeTodo, handleCloseTodo }: TodoProps) {
+  const [todoList, setTodoList] = useState<TodoItem[]>([]);
   const [inputValue, setInputValue] = useState('');
 
   const handleCloseBtn = () => {
     handleCloseTodo();
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (inputValue.length === 0) {
       alert('Todo를 작성해주세요.');
     } else if (inputValue.length < 11) {
-      setTodoList((current) => {
-        return [
-          ...current,
-          {
-            id: new Date().getTime(),
-            isCompleted: false,
-            value: inputValue,
-          },
-        ];
-      });
+      setTodoList((current) => [
+        ...current,
+        {
+          id: new Date().getTime(),
+          isCompleted: false,
+          value: inputValue,
+        },
+      ]);
     } else {
       alert('10글자 이내로 작성해주세요.');
     }
@@ -34,7 +43,7 @@ function Todo({ closeTodo, handleCloseTodo }) {
     setInputValue('');
   };
 
-  const handleCompleteClick = (index) => {
+  const handleCompleteClick = (index: number) => {
     setTodoList((current) => {
       const newTodoList = [...current];
       newTodoList[index].isCompleted = true;
@@ -42,7 +51,7 @@ function Todo({ closeTodo, handleCloseTodo }) {
     });
   };
 
-  const handleRemoveClick = (index) => {
+  const handleRemoveClick = (index: number) => {
     setTodoList((current) => {
       const newTodoList = [...current];
       newTodoList.splice(index, 1);
@@ -54,14 +63,14 @@ function Todo({ closeTodo, handleCloseTodo }) {
     <div className={`todo ${closeTodo ? 'disabled' : ''}`}>
       <span id='todo-title'>To-Do List</span>
       <FontAwesomeIcon
-        icon={faXmark}
+        icon={faTimes}
         className='closeButton'
         onClick={handleCloseBtn}
       />
       <div className='todo-list-wrap'>
         <ol id='todo-list'>
           {todoList.map((item, index) => (
-            <li className={item.isCompleted === true ? 'completed' : ''}>
+            <li key={item.id} className={item.isCompleted ? 'completed' : ''}>
               <span>{item.value}</span>
               <button
                 id='todo-complete-button'

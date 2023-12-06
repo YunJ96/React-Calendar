@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Login/Login.modules.scss';
 
@@ -16,7 +16,7 @@ function Join() {
 
   const navigate = useNavigate();
 
-  const handleName = (e) => {
+  const handleName = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     setName(e.target.value);
 
@@ -27,7 +27,7 @@ function Join() {
     }
   };
 
-  const handleEmail = (e) => {
+  const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     setEmail(inputValue);
     const regex =
@@ -40,7 +40,7 @@ function Join() {
     }
   };
 
-  const handlePassword = (e) => {
+  const handlePassword = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     setPw(inputValue);
     const regex =
@@ -53,7 +53,7 @@ function Join() {
     }
   };
 
-  const handlePasswordConfirm = (e) => {
+  const handlePasswordConfirm = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     setPwConfirm(inputValue);
 
@@ -64,7 +64,7 @@ function Join() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
     if (nameValid && emailValid && pwValid && pwConfirmValid) {

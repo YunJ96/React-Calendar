@@ -1,10 +1,10 @@
-import { Router } from 'express';
-import userRouter from './userRouter.js';
+import { Request, Response, NextFunction, Router } from 'express';
+import userRouter from './userRouter';
 import authRouter from './authRouter.js';
 
 const router = Router();
 
-router.get('/', (req, res, next) => {
+router.get('/', (req: Request, res: Response, next: NextFunction) => {
   console.log('api router test');
   res.send("Hi! I'm router. path : /api");
 });

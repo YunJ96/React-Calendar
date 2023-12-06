@@ -4,7 +4,11 @@ import 'react-calendar/dist/Calendar.css';
 import dayjs from 'dayjs';
 import './styles.scss';
 
-function Diary({ onDateClick }) {
+interface DiaryProps {
+  onDateClick: (date: Date) => void;
+}
+
+function Diary({ onDateClick }: DiaryProps) {
   return (
     <div className='calendar-wrap'>
       <Calendar

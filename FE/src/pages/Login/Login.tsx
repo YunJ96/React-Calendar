@@ -1,44 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.modules.scss';
 
-const User = {
+interface IUser {
+  email: string;
+  pw: string;
+}
+
+const User: IUser = {
   email: 'test@gmail.com',
   pw: 'test123!!!',
 };
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [pw, setPw] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [pw, setPw] = useState<string>('');
 
-  const [emailValid, setEmailValid] = useState(false);
-  const [pwValid, setPwValid] = useState(false);
-  const [notAllow, setNotAllow] = useState(true);
+  const [emailValid, setEmailValid] = useState<boolean>(false);
+  const [pwValid, setPwValid] = useState<boolean>(false);
+  const [notAllow, setNotAllow] = useState<boolean>(true);
 
   const navigate = useNavigate();
 
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
+  const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    setEmail(inputValue);
     const regex =
       /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 
-    if (regex.test(email)) {
-      setEmailValid(true);
-    } else {
-      setEmailValid(false);
-    }
+    setEmailValid(regex.test(inputValue));
   };
 
-  const handlePassword = (e) => {
-    setPw(e.target.value);
+  const handlePassword = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    setPw(inputValue);
     const regex =
       /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
 
-    if (regex.test(pw)) {
-      setPwValid(true);
-    } else {
-      setPwValid(false);
-    }
+    setPwValid(regex.test(inputValue));
   };
 
   const onClickConfirmButton = () => {
@@ -52,9 +51,9 @@ function Login() {
   useEffect(() => {
     if (emailValid && pwValid) {
       setNotAllow(false);
-      return;
+    } else {
+      setNotAllow(true);
     }
-    setNotAllow(true);
   }, [emailValid, pwValid]);
 
   return (
