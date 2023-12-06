@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './styles.scss';
 import { useNavigate } from 'react-router-dom';
-import weatherApi from '../../../api/weather.js';
+import weatherApi from '../../../api/weather';
 
 function Header() {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ function Header() {
   useEffect(() => {
     const callWeatherApi = async () => {
       try {
-        const response: any = await weatherApi();
+        const response = await weatherApi();
         setTemp(response[0]);
         setWeather(response[1]);
       } catch (error) {
