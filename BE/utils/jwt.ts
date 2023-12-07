@@ -40,7 +40,7 @@ const setUserToken = (user: IUser, isOnlyAccess: boolean) => {
         console.log(res);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
 
     return { accessToken, refreshToken };

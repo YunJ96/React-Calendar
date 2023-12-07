@@ -1,18 +1,19 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Login/Login.modules.scss';
+import userApi from '../../api/userApi';
 
 function Join() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [pw, setPw] = useState('');
-  const [pwConfirm, setPwConfirm] = useState('');
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [pw, setPw] = useState<string>('');
+  const [pwConfirm, setPwConfirm] = useState<string>('');
 
-  const [nameValid, setNameValid] = useState(false);
-  const [emailValid, setEmailValid] = useState(false);
-  const [pwValid, setPwValid] = useState(false);
-  const [pwConfirmValid, setPwConfirmValid] = useState(false);
-  const [notAllow, setNotAllow] = useState(true);
+  const [nameValid, setNameValid] = useState<boolean>(false);
+  const [emailValid, setEmailValid] = useState<boolean>(false);
+  const [pwValid, setPwValid] = useState<boolean>(false);
+  const [pwConfirmValid, setPwConfirmValid] = useState<boolean>(false);
+  const [notAllow, setNotAllow] = useState<boolean>(true);
 
   const navigate = useNavigate();
 
@@ -71,6 +72,17 @@ function Join() {
       navigate('/');
     } else {
       alert('회원정보를 정확히 입력해주세요.');
+    }
+  };
+
+  const handleJoinButton = async () => {
+    try {
+      const response = await userApi.join(name, email, pw);
+      console.log(response);
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+      alert('회원 가입에 실패했습니다. 다시 시도해주시기 바랍니다.');
     }
   };
 
@@ -167,6 +179,7 @@ function Join() {
             disabled={notAllow}
             id='joinButton'
             className='bottomButtons'
+            onClick={handleJoinButton}
           >
             Join
           </button>

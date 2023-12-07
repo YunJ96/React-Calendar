@@ -3,8 +3,8 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import passport from 'passport';
-import apiRouter from './routers/index.js';
-import configurePassport from './passport/index.js';
+import apiRouter from './routers/index';
+import configurePassport from './passport/index';
 
 dotenv.config();
 

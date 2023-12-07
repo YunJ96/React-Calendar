@@ -1,6 +1,6 @@
 import { PassportStatic } from 'passport';
-import accessJwt from './strategies/accessJwt.js';
-import refreshJwt from './strategies/refreshJwt.js';
+import accessJwt from './strategies/accessJwt';
+import refreshJwt from './strategies/refreshJwt';
 
 const configurePassport = (passport: PassportStatic) => {
   passport.use('access', accessJwt);

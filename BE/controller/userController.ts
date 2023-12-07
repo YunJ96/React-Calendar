@@ -11,14 +11,14 @@ const userController = {
   //유저 회원가입
   async registerUser(req: Request, res: Response) {
     try {
-      const { email, name, password } = req.body;
+      const { name, email, password } = req.body;
       const registeredEmail = await userService.getUserByEmail(email);
 
       if (registeredEmail) {
         return res.status(500).json({ error: '이미 등록된 이메일입니다.' });
       }
 
-      const user = await userService.registerUser(email, password, name);
+      const user = await userService.registerUser(name, email, password);
       res.status(200).json({
         message: `회원가입이 정상적으로 이루어졌습니다. ${name}님 환영합니다.`,
         user,

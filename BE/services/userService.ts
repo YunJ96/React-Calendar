@@ -8,16 +8,15 @@ interface RegisterUser {
 }
 
 const registerUser: RegisterUser = async (
-  email: string,
   name: string,
+  email: string,
   password: string
 ) => {
   try {
     const hashedPassword = await hashPassword(password);
-
     const user = new User({
-      email,
       name,
+      email,
       password: hashedPassword,
     });
 
@@ -51,7 +50,7 @@ const userService = {
     }
 
     try {
-      const { accessToken, refreshToken } = await setUserToken(user, false);
+      const { accessToken, refreshToken } = setUserToken(user, false);
       return { accessToken, refreshToken };
     } catch (error) {
       throw new Error('로그인 오류입니다. 잠시 후 다시 이용해 주세요.');

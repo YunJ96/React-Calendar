@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 
 const salt = 10;
 
-const hashPassword = async (password) => {
+const hashPassword = async (password: string) => {
   try {
     const hashedPassword = await bcrypt.hash(password, salt);
     return hashedPassword;
