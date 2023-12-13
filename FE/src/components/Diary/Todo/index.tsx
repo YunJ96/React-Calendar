@@ -72,20 +72,22 @@ function Todo({ closeTodo, handleCloseTodo }: TodoProps) {
           {todoList.map((item, index) => (
             <li key={item.id} className={item.isCompleted ? 'completed' : ''}>
               <span>{item.value}</span>
-              <button
-                id='todo-complete-button'
-                className='buttons'
-                onClick={() => handleCompleteClick(index)}
-              >
-                완료
-              </button>
-              <button
-                id='todo-delete-button'
-                className='buttons'
-                onClick={() => handleRemoveClick(index)}
-              >
-                삭제
-              </button>
+              <div>
+                <button
+                  id='todo-complete-button'
+                  className='buttons'
+                  onClick={() => handleCompleteClick(index)}
+                >
+                  완료
+                </button>
+                <button
+                  id='todo-delete-button'
+                  className='buttons'
+                  onClick={() => handleRemoveClick(index)}
+                >
+                  삭제
+                </button>
+              </div>
             </li>
           ))}
         </ol>

@@ -1,9 +1,6 @@
 .header {
-  width: 50%;
+  width: 60%;
   margin: 60px auto;
-  position: fixed;
-  top: 0;
-  left: 25%;
   .header__navs {
     display: flex;
     flex-direction: row;
@@ -15,6 +12,9 @@
       flex-direction: row;
       padding: 10px;
       cursor: pointer;
+      span {
+        margin: 5px;
+      }
     }
   }
 }

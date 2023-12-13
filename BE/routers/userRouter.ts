@@ -6,9 +6,11 @@ import authRefresh from '../middlewares/authRefresh';
 
 const userRouter = Router();
 
-// 유저 회원가입 API
+// 유저 회원가입
 userRouter.post('/register', userController.registerUser);
-// 유저 로그인 API
+// 유저 로그인
 userRouter.post('/login', userController.loginUser);
+// 유저 로그아웃
+userRouter.get('/logout', authAccess, userController.logoutUser);
 
 export default userRouter;

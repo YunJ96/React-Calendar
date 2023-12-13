@@ -53,6 +53,17 @@ const userApi = {
       throw error;
     }
   },
+  logout: async () => {
+    const url = `http://${process.env.REACT_APP_URL}:${process.env.REACT_APP_BE_PORT}/api/user/logout`;
+
+    try {
+      const response = await axios.get(url);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
 };
 
 export default userApi;

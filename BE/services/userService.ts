@@ -91,11 +91,11 @@ const userService = {
     }
   },
 
-  invalidateTokens: async (id: string) => {
+  invalidateTokens: async (email: string) => {
     try {
       // Access 토큰과 Refresh 토큰 모두 무효화
       await User.updateOne(
-        { id },
+        { email },
         {
           $unset: {
             accessToken: 1,

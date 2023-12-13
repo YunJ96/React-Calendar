@@ -61,7 +61,7 @@ function Login() {
           <input
             type='text'
             className='input'
-            placeholder='test@gmail.com'
+            placeholder='Email'
             value={email}
             onChange={handleEmail}
           />
@@ -69,7 +69,7 @@ function Login() {
 
         <div className='errorMessage-wrap'>
           {!emailValid && email.length > 0 && (
-            <div>올바른 아이디를 입력해주세요.</div>
+            <div>올바른 Email을 입력해주세요.</div>
           )}
         </div>
 

@@ -1,9 +1,7 @@
 .todo {
   display: flex;
   flex-direction: column;
-  position: fixed;
-  top: 30%;
-  left: 70%;
+  position: relative;
   width: 250px;
   height: 320px;
   border: solid #ff6f61;
@@ -18,13 +16,24 @@
   #todo-list {
     li {
       margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       span {
         color: #ff6f61;
+        font-size: 15px;
         font-weight: bold;
         display: inline-block;
         margin: 3px 8px;
       }
     }
+  }
+  .closeButton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #ff6f61;
+    cursor: pointer;
   }
 }
 
@@ -53,33 +62,18 @@
   outline: none;
 }
 
-#todo-complete-button {
-  margin-right: 42px;
-  position: absolute;
-  left: 172px;
-  font-weight: bold;
-  background-color: white;
-  border: solid 1px #ff6f61;
-  color: #ff6f61;
-}
-
 #todo-delete-button {
-  margin-right: 5px;
-  position: absolute;
-  left: 210px;
+  margin: 0 5px 0 1px;
   font-weight: bold;
   border: solid 1px #ff6f61;
   background-color: #ff6f61;
   color: white;
 }
 
+#todo-complete-button,
 #todo-button {
   font-weight: bold;
   background-color: white;
   border: solid 1px #ff6f61;
   color: #ff6f61;
-}
-
-.disabled {
-  display: none;
 }
