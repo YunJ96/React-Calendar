@@ -25,6 +25,34 @@ const userApi = {
       throw error;
     }
   },
+  login: async (email: string, password: string) => {
+    const url = `http://${process.env.REACT_APP_URL}:${process.env.REACT_APP_BE_PORT}/api/user/login`;
+
+    try {
+      const response = await axios.post(
+        url,
+        {
+          email: email,
+          password: password,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      const { accessToken, refreshToken } = response.data;
+
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
 };
 
 export default userApi;

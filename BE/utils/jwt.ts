@@ -10,13 +10,12 @@ const setUserToken = (user: IUser, isOnlyAccess: boolean) => {
     name: user.name,
     email: user.email,
     // profileImage: user.profileImage,
-    // isAdmin: user.isAdmin,
-    // isTempPassword: user.isTempPassword,
+    isAdmin: user.isAdmin,
   };
   const accessOptions = { algorithm: 'HS256', expiresIn: '1h' };
   const accessToken = sign(
     accessPayload,
-    process.env.ACCESSSECRET as Secret,
+    process.env.ACCESS_SECRET as Secret,
     accessOptions as SignOptions
   );
 
@@ -27,7 +26,7 @@ const setUserToken = (user: IUser, isOnlyAccess: boolean) => {
     const refreshOptions = { algorithm: 'HS256', expiresIn: '7d' };
     const refreshToken = sign(
       refreshPayload,
-      process.env.REFRESHSECRET as Secret,
+      process.env.REFRESH_SECRET as Secret,
       refreshOptions as SignOptions
     );
     User.updateOne(

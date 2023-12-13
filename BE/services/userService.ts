@@ -32,10 +32,10 @@ const userService = {
   //유저 회원가입
   registerUser,
   //유저 로그인
-  async loginUser(email: string, password: string) {
+  loginUser: async (email: string, password: string) => {
     const user = await User.findOne({ email }).select('+password');
 
-    if (!user || user.password) {
+    if (!user || !user.password) {
       throw new Error(
         '등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.'
       );
@@ -44,9 +44,7 @@ const userService = {
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
-      throw new Error(
-        '등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.'
-      );
+      throw new Error('비밀번호를 확인해주시기 바랍니다.');
     }
 
     try {
@@ -58,16 +56,16 @@ const userService = {
   },
 
   // Email로 유저 가져오기
-  async getUserByEmail(email: string) {
+  getUserByEmail: async (email: string) => {
     return User.findOne({ email }) || null;
   },
 
   // 모든 유저 가져오기
-  async getAllUsers() {
+  getAllUsers: async () => {
     return User.find();
   },
 
-  async getUserForToken(shortId: string) {
+  getUserForToken: async (shortId: string) => {
     try {
       const user = await User.findOne(
         { shortId },
@@ -80,16 +78,33 @@ const userService = {
       );
       return user;
     } catch (error) {
-      throw new Error('유저의 토큰을 생성하는데 실패했습니다.');
+      throw new Error('토큰을 생성에 실패했습니다.');
     }
   },
 
-  async getUserRefreshToken(shortId: string) {
+  getUserRefreshToken: async (shortId: string) => {
     try {
       const user = await User.findOne({ shortId }, 'refreshToken');
       return user;
     } catch (error) {
-      throw new Error('유저의 refresh토큰을 발견하는데 실패했습니다.');
+      throw new Error('유저의 refresh 토큰을 찾지 못했습니다.');
+    }
+  },
+
+  invalidateTokens: async (id: string) => {
+    try {
+      // Access 토큰과 Refresh 토큰 모두 무효화
+      await User.updateOne(
+        { id },
+        {
+          $unset: {
+            accessToken: 1,
+            refreshToken: 1,
+          },
+        }
+      );
+    } catch (error) {
+      throw new Error('토큰 제거에 실패했습니다.');
     }
   },
 };

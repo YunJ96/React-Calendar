@@ -79,6 +79,7 @@ function Join() {
     try {
       const response = await userApi.join(name, email, pw);
       console.log(response);
+      alert(`회원가입이 완료되었습니다. 환영합니다. ${name}님`);
       navigate('/');
     } catch (error) {
       console.error(error);

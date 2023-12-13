@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const jwtOptions = {
-  secretOrKey: process.env.REFRESHSECRET,
+  secretOrKey: process.env.REFRESH_SECRET,
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 };
 

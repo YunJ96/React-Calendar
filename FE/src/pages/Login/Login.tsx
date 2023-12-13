@@ -1,16 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.modules.scss';
-
-interface IUser {
-  email: string;
-  pw: string;
-}
-
-const User: IUser = {
-  email: 'test@gmail.com',
-  pw: 'test123!!!',
-};
+import userApi from '../../api/userApi';
 
 function Login() {
   const [email, setEmail] = useState<string>('');
@@ -40,11 +31,14 @@ function Login() {
     setPwValid(regex.test(inputValue));
   };
 
-  const onClickConfirmButton = () => {
-    if (email === User.email && pw === User.pw) {
-      alert('로그인에 성공하였습니다.');
-    } else {
-      alert('등록되지 않은 회원입니다.');
+  const handleLoginButton = async () => {
+    try {
+      const response = await userApi.login(email, pw);
+      console.log(response);
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+      alert('로그인에 실패했습니다. 잠시 후 다시 시도해주시기 바랍니다.');
     }
   };
 
@@ -102,7 +96,7 @@ function Login() {
 
       <div>
         <button
-          onClick={onClickConfirmButton}
+          onClick={handleLoginButton}
           disabled={notAllow}
           id='loginButton'
           className='bottomButtons'
