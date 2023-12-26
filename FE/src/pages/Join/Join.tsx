@@ -1,6 +1,5 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../Login/Login.modules.scss';
 import userApi from '../../api/userApi';
 
 function Join() {

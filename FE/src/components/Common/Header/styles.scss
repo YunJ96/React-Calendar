@@ -6,7 +6,12 @@
     flex-direction: row;
     justify-content: space-around;
     padding: 10px;
-    border-bottom: solid 0.1px;
+    border-bottom: solid 0.1px #ff6f61;
+    span {
+      font-size: 20px;
+      font-weight: bold;
+      color: #ff6f61;
+    }
     .header__nav {
       display: flex;
       flex-direction: row;

@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Login.modules.scss';
 import userApi from '../../api/userApi';
 
 function Login() {

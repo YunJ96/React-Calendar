@@ -1,6 +1,5 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import SideNav from '../../components/Common/Side';
-import '../Login/Login.modules.scss';
 import './MyPage.modules.scss';
 
 function MyPage() {
