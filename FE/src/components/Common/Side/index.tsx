@@ -2,9 +2,8 @@ import React, { useEffect } from 'react';
 import './styles.scss';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { jwtDecode, JwtPayload } from 'jwt-decode';
-import userApi from '../../../api/userApi';
-import { login, RootState } from '../../../store/userSlice';
+import { jwtDecode } from 'jwt-decode';
+import { login, logout, RootState } from '../../../store/userSlice';
 
 function SideNav() {
   const navigate = useNavigate();
@@ -29,22 +28,11 @@ function SideNav() {
     return <div>Loading...</div>;
   }
 
-  const handleLogoutButton = async () => {
-    try {
-      const response = await userApi.logout();
-      console.log(response);
-      navigate('/');
-    } catch (error) {
-      console.error(error);
-      alert('로그아웃에 실패했습니다. 다시 시도해주시기 바랍니다.');
-    }
-  };
-
   return (
     <div className='side-content'>
       <div className='sideNav'>
         <div className='side-image'>
-          {user ? (
+          {user && user.name !== undefined ? (
             <div>{`${user.name} 님 반가워요.`}</div>
           ) : (
             <div>{'로그인을 해주세요!'}</div>
@@ -52,7 +40,16 @@ function SideNav() {
         </div>
         <div className='sideNav__buttons'>
           {token ? (
-            <button onClick={handleLogoutButton}>Logout</button>
+            <button
+              onClick={() => {
+                dispatch(logout());
+                localStorage.clear();
+                navigate('/');
+                alert('다음에 또 만나요! :D');
+              }}
+            >
+              Logout
+            </button>
           ) : (
             <>
               <button onClick={() => navigate('/login')}>Login</button>

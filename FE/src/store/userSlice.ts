@@ -6,7 +6,7 @@ interface UserState {
 }
 
 const initialState: UserState = {
-  user: `로그인을 해주세요!`,
+  user: '로그인을 해주세요!',
   loading: true,
 };
 
@@ -18,10 +18,14 @@ export const userSlice = createSlice({
       state.user = action.payload;
       state.loading = false;
     },
+    logout: (state) => {
+      state.user = '로그인을 해주세요!';
+      state.loading = false;
+    },
   },
 });
 
-export const { login } = userSlice.actions;
+export const { login, logout } = userSlice.actions;
 export default userSlice.reducer;
 export type RootState = {
   user: ReturnType<typeof userSlice.reducer>;
