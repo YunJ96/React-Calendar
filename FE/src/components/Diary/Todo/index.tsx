@@ -72,17 +72,17 @@ function Todo({ closeTodo, handleCloseTodo }: TodoProps) {
           {todoList.map((item, index) => (
             <li key={item.id} className={item.isCompleted ? 'completed' : ''}>
               <span>{item.value}</span>
-              <div>
+              <div className='todo-buttons'>
                 <button
                   id='todo-complete-button'
-                  className='buttons'
+                  className='todo-button'
                   onClick={() => handleCompleteClick(index)}
                 >
                   완료
                 </button>
                 <button
                   id='todo-delete-button'
-                  className='buttons'
+                  className='todo-button'
                   onClick={() => handleRemoveClick(index)}
                 >
                   삭제

@@ -28,9 +28,13 @@ function SideNav() {
       <div className='sideNav'>
         <div className='side-image'>
           {user && user.name !== undefined ? (
-            <div>{`${user.name} 님 반가워요.`}</div>
+            <div
+              style={{ backgroundColor: 'white' }}
+            >{`${user.name} 님 반가워요.`}</div>
           ) : (
-            <div>{'로그인을 해주세요!'}</div>
+            <div style={{ backgroundColor: 'white' }}>
+              {'로그인을 해주세요!'}
+            </div>
           )}
         </div>
         <div className='sideNav__buttons'>
@@ -53,7 +57,6 @@ function SideNav() {
           )}
         </div>
       </div>
-      <div className='sideMenu'>Menu</div>
     </div>
   );
 }

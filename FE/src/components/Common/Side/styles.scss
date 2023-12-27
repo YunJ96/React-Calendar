@@ -1,6 +1,7 @@
 .side-content {
   display: flex;
   flex-direction: column;
+  border-radius: 5%;
   .sideNav {
     display: flex;
     flex-direction: row;
@@ -8,19 +9,21 @@
     align-items: center;
     width: 180px;
     height: 130px;
-    border: 2px solid #ff6f61;
+    background-color: white;
     border-radius: 5px;
     .side-image {
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
+      background-color: white;
       width: 80px;
       height: 80px;
     }
     .sideNav__buttons {
       display: flex;
       flex-direction: column;
+      background-color: white;
       button {
         width: 80px;
         height: 30px;
@@ -28,15 +31,5 @@
         color: white;
       }
     }
-  }
-  .sideMenu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-    width: 180px;
-    height: 175px;
-    border: 2px solid #ff6f61;
-    border-radius: 5px;
   }
 }

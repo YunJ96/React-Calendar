@@ -3,7 +3,7 @@ import './styles.scss';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { jwtDecode } from 'jwt-decode';
-import { login, logout, RootState } from '../../../store/userSlice';
+import { login, RootState } from '../../../store/userSlice';
 import weatherApi from '../../../api/weather';
 
 function Header() {
