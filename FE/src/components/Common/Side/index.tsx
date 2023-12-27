@@ -10,7 +10,6 @@ function SideNav() {
   const dispatch = useDispatch();
   const token = localStorage.getItem('accessToken');
   const user = useSelector((state: RootState) => state.user.user);
-  const loading = useSelector((state: RootState) => state.user.loading);
 
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
@@ -23,10 +22,6 @@ function SideNav() {
       dispatch(login('로그인을 해주세요!'));
     }
   }, [dispatch]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className='side-content'>

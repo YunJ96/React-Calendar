@@ -1,23 +1,35 @@
 .header {
-  width: 60%;
-  margin: 60px auto;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 20px;
+
   .header__navs {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 10px;
-    border-bottom: solid 0.1px #ff6f61;
-    span {
-      font-size: 20px;
-      font-weight: bold;
-      color: #ff6f61;
-    }
+    justify-content: space-between;
+    align-items: center;
+    width: 1140px;
+    height: 80px;
+    margin: 0 auto;
+    padding: 0 20px;
+    border-bottom: 2px solid #ff6f61;
+
     .header__nav {
       display: flex;
       flex-direction: row;
       padding: 10px;
       cursor: pointer;
+      color: #ff6f61;
+      font-size: 18px;
+      font-weight: 800;
+
+      &:last-child {
+        margin-left: auto;
+      }
+
       span {
+        color: black;
+        font-size: 18px;
+        font-weight: 800;
         margin: 5px;
       }
     }

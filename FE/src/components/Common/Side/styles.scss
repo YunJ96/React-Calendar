@@ -6,9 +6,9 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    width: 220px;
+    width: 180px;
     height: 130px;
-    border: solid #ff6f61;
+    border: 2px solid #ff6f61;
     border-radius: 5px;
     .side-image {
       display: flex;
@@ -34,9 +34,9 @@
     justify-content: center;
     align-items: center;
     margin-top: 10px;
-    width: 220px;
+    width: 180px;
     height: 175px;
-    border: solid #ff6f61;
+    border: 2px solid #ff6f61;
     border-radius: 5px;
   }
 }

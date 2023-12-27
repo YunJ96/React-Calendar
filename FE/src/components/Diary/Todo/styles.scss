@@ -32,7 +32,7 @@
     position: absolute;
     top: 5px;
     right: 5px;
-    color: #ff6f61;
+    color: #ff5545;
     cursor: pointer;
   }
 }
@@ -55,7 +55,7 @@
   color: #ff6f61;
   background-color: white;
   border: none;
-  border-bottom: #ff6f61 solid 1px;
+  border-bottom: #ff5545 solid 1px;
 }
 
 .create-todo-input:focus {
@@ -65,8 +65,8 @@
 #todo-delete-button {
   margin: 0 5px 0 1px;
   font-weight: bold;
-  border: solid 1px #ff6f61;
-  background-color: #ff6f61;
+  border: solid 1px #ff5545;
+  background-color: #ff5545;
   color: white;
 }
 
@@ -74,6 +74,6 @@
 #todo-button {
   font-weight: bold;
   background-color: white;
-  border: solid 1px #ff6f61;
-  color: #ff6f61;
+  border: solid 1px #ff5545;
+  color: #ff5545;
 }
