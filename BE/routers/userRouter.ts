@@ -12,5 +12,7 @@ userRouter.post('/register', userController.registerUser);
 userRouter.post('/login', userController.loginUser);
 // 유저 로그아웃
 userRouter.get('/logout', authAccess, userController.logoutUser);
+// 유저 정보 업데이트
+userRouter.patch('/update', authAccess, userController.updateUserInfo);
 
 export default userRouter;

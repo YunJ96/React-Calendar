@@ -54,7 +54,45 @@ const userService = {
       throw new Error('로그인 오류입니다. 잠시 후 다시 이용해 주세요.');
     }
   },
+  //유저정보 업데이트
+  updateUser: async (name: string, email: string, password: string) => {
+    const hashedPassword = await hashPassword(password);
+    const updatedUser = await User.findOneAndUpdate(
+      { email },
+      {
+        name: name,
+        password: hashedPassword,
+      },
+      { new: true }
+    );
 
+    if (!updatedUser) {
+      return null;
+    }
+
+    const user = await User.findOne({ email });
+
+    if (!user || !user.password) {
+      throw new Error(
+        '등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.'
+      );
+    }
+
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      throw new Error('비밀번호를 확인해주시기 바랍니다.');
+    }
+
+    try {
+      const { accessToken, refreshToken } = setUserToken(user, false);
+      return { updatedUser, accessToken, refreshToken };
+    } catch (error) {
+      throw new Error(
+        '유저 정보를 업데이트 하는 데 실패했습니다. 잠시 후 다시 이용해 주세요.'
+      );
+    }
+  },
   // Email로 유저 가져오기
   getUserByEmail: async (email: string) => {
     return User.findOne({ email }) || null;

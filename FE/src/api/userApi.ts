@@ -53,6 +53,35 @@ const userApi = {
       throw error;
     }
   },
+  update: async (name: string, email: string, password: string) => {
+    const url = `http://${process.env.REACT_APP_URL}:${process.env.REACT_APP_BE_PORT}/api/user/update`;
+    const token = localStorage.getItem('accessToken');
+
+    try {
+      const response = await axios.patch(
+        url,
+        {
+          name: name,
+          email: email,
+          password: password,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      localStorage.clear();
+      localStorage.setItem('accessToken', response.data.accessToken);
+      localStorage.setItem('refreshToken', response.data.refreshToken);
+      console.log(response);
+      return response.data.updatedUser;
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
 
 export default userApi;

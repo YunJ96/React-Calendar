@@ -1,29 +1,37 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
+import { useDispatch, useSelector } from 'react-redux';
 import SideNav from '../../components/Common/Side';
 import './MyPage.modules.scss';
+import userApi from '../../api/userApi';
+import { RootState, login } from '../../store/userSlice';
 
 interface JwtPayload {
   name: string;
   email: string;
 }
 
+interface DecodedToken {
+  name: string;
+  email: string;
+}
+
 function MyPage() {
+  const dispatch = useDispatch();
   const token = localStorage.getItem('accessToken');
-  let decodedToken;
+  let decodedToken: DecodedToken | undefined;
 
   if (!token) {
     console.error('토큰이 없습니다.');
   } else {
     try {
       decodedToken = jwtDecode<JwtPayload>(token);
-      console.log(decodedToken);
     } catch (error) {
       console.error('토큰 해독 오류:', error);
     }
   }
 
-  const [name, setName] = useState<string | undefined>(decodedToken?.name);
+  const [name, setName] = useState<string>('');
   const [pw, setPw] = useState<string>('');
   const [pwConfirm, setPwConfirm] = useState<string>('');
 
@@ -67,11 +75,21 @@ function MyPage() {
     }
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (nameValid && pwValid && pwConfirmValid) {
-      alert('회원정보가 수정되었습니다.');
+    if (nameValid && pwValid && pwConfirmValid && name && decodedToken) {
+      try {
+        const response = await userApi.update(name, decodedToken.email, pw);
+
+        dispatch(login(response?.data.updateUser.name));
+
+        alert('회원정보가 수정되었습니다.');
+        window.location.reload();
+      } catch (error) {
+        console.error(error);
+        alert('회원정보를 업데이트하는 중 오류가 발생했습니다.');
+      }
     } else {
       alert('회원정보를 정확히 입력해주세요.');
     }
@@ -90,23 +108,6 @@ function MyPage() {
       <SideNav />
       <form action='submit' onSubmit={handleSubmit}>
         <div className='content-wrap'>
-          <div className='input-title'>Name</div>
-
-          <div className='input-wrap'>
-            <input
-              type='text'
-              className='input'
-              value={name}
-              onChange={handleName}
-            />
-          </div>
-
-          <div className='errorMessage-wrap'>
-            {!nameValid && name && name.length < 2 && (
-              <div>이름은 2글자 이상 입력해주세요.</div>
-            )}
-          </div>
-
           <div className='input-title'>E-mail</div>
 
           <div className='input-wrap'>
@@ -116,6 +117,23 @@ function MyPage() {
               value={decodedToken?.email}
               readOnly={true}
             />
+          </div>
+
+          <div className='input-title'>Name</div>
+
+          <div className='input-wrap'>
+            <input
+              type='text'
+              className='input'
+              placeholder={'이름을 입력해주세요.'}
+              onChange={handleName}
+            />
+          </div>
+
+          <div className='errorMessage-wrap'>
+            {!nameValid && name && name.length < 2 && (
+              <div>이름은 2글자 이상 입력해주세요.</div>
+            )}
           </div>
 
           <div className='input-title'>Password</div>

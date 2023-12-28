@@ -58,6 +58,31 @@ const userController = {
       res.status(500).json({ error: error.message });
     }
   },
+  //유저정보 업데이트
+  updateUserInfo: async (req: Request, res: Response) => {
+    try {
+      const { name, email, password } = req.body;
+      const registeredEmail = await userService.getUserByEmail(email);
+
+      if (registeredEmail) {
+        const updateUser = await userService.updateUser(name, email, password);
+        const { accessToken, refreshToken } = await userService.loginUser(
+          email,
+          password
+        );
+        res.status(200).json({
+          message: '유저 정보가 정상적으로 업데이트되었습니다.',
+          updateUser,
+          accessToken,
+          refreshToken,
+        });
+      } else {
+        res.status(500).json({ error: Error });
+      }
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  },
 };
 
 export default userController;
