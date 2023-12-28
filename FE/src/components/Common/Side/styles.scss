@@ -9,21 +9,19 @@
     align-items: center;
     width: 180px;
     height: 130px;
-    background-color: white;
+    border: solid 2px #333333;
     border-radius: 5px;
     .side-image {
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
-      background-color: white;
       width: 80px;
       height: 80px;
     }
     .sideNav__buttons {
       display: flex;
       flex-direction: column;
-      background-color: white;
       button {
         width: 80px;
         height: 30px;

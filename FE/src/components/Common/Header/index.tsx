@@ -30,7 +30,7 @@ function Header() {
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
 
-    if (token && process.env.REACT_APP_JWT_SECRETKEY) {
+    if (token) {
       const decodedToken = jwtDecode(token);
       console.log(decodedToken);
       dispatch(login(decodedToken));
@@ -53,7 +53,17 @@ function Header() {
           <span className='header__nav' onClick={() => navigate('/diary')}>
             Calendar
           </span>
-          <span className='header__nav' onClick={() => navigate('/myPage')}>
+          <span
+            className='header__nav'
+            onClick={() => {
+              // const token = localStorage.getItem('accessToken');
+              // if (token) {
+              navigate('/myPage');
+              // } else {
+              //   alert('로그인 후 이용가능한 서비스입니다.');
+              // }
+            }}
+          >
             My Page
           </span>
           <div className='header__nav'>

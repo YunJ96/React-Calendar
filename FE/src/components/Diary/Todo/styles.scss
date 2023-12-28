@@ -4,13 +4,12 @@
   position: relative;
   width: 250px;
   height: 320px;
-  background-color: white;
   overflow-y: auto;
+  border: solid 2px #333333;
   border-radius: 5%;
 
   #todo-title {
     margin: 15px 64px;
-    background-color: white;
     color: #333333;
     font-size: 25px;
     font-weight: bold;
@@ -22,9 +21,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background-color: white;
       span {
-        background-color: white;
         color: #333333;
         font-size: 15px;
         font-weight: bold;
@@ -34,15 +31,10 @@
     }
   }
 
-  .todo-list-wrap {
-    background-color: white;
-  }
-
   .closeButton {
     position: absolute;
-    top: 5px;
-    right: 5px;
-    background-color: white;
+    top: 6px;
+    right: 6px;
     color: #333333;
     cursor: pointer;
   }
@@ -57,7 +49,6 @@
 }
 
 #create-todo {
-  background-color: white;
   margin-bottom: 5px;
 }
 
@@ -65,17 +56,12 @@
   margin: 3px 10px;
   width: 190px;
   color: #333333;
-  background-color: white;
   border: none;
   border-bottom: #333333 solid 1px;
 }
 
 .create-todo-input:focus {
   outline: none;
-}
-
-.todo-buttons {
-  background-color: white;
 }
 
 #todo-delete-button {

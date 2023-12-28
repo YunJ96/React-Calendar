@@ -1,15 +1,33 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { jwtDecode } from 'jwt-decode';
 import SideNav from '../../components/Common/Side';
 import './MyPage.modules.scss';
 
+interface JwtPayload {
+  name: string;
+  email: string;
+}
+
 function MyPage() {
-  const [name, setName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
+  const token = localStorage.getItem('accessToken');
+  let decodedToken;
+
+  if (!token) {
+    console.error('토큰이 없습니다.');
+  } else {
+    try {
+      decodedToken = jwtDecode<JwtPayload>(token);
+      console.log(decodedToken);
+    } catch (error) {
+      console.error('토큰 해독 오류:', error);
+    }
+  }
+
+  const [name, setName] = useState<string | undefined>(decodedToken?.name);
   const [pw, setPw] = useState<string>('');
   const [pwConfirm, setPwConfirm] = useState<string>('');
 
-  const [nameValid, setNameValid] = useState<boolean>(false);
-  const [emailValid, setEmailValid] = useState<boolean>(false);
+  const [nameValid, setNameValid] = useState<boolean>(true);
   const [pwValid, setPwValid] = useState<boolean>(false);
   const [pwConfirmValid, setPwConfirmValid] = useState<boolean>(false);
   const [notAllow, setNotAllow] = useState<boolean>(true);
@@ -22,19 +40,6 @@ function MyPage() {
       setNameValid(true);
     } else {
       setNameValid(false);
-    }
-  };
-
-  const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setEmail(inputValue);
-    const regex =
-      /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-
-    if (regex.test(inputValue)) {
-      setEmailValid(true);
-    } else {
-      setEmailValid(false);
     }
   };
 
@@ -65,7 +70,7 @@ function MyPage() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    if (nameValid && emailValid && pwValid && pwConfirmValid) {
+    if (nameValid && pwValid && pwConfirmValid) {
       alert('회원정보가 수정되었습니다.');
     } else {
       alert('회원정보를 정확히 입력해주세요.');
@@ -73,12 +78,12 @@ function MyPage() {
   };
 
   useEffect(() => {
-    if (nameValid && emailValid && pwValid && pwConfirmValid) {
+    if (nameValid && pwValid && pwConfirmValid) {
       setNotAllow(false);
       return;
     }
     setNotAllow(true);
-  }, [nameValid, emailValid, pwValid, pwConfirmValid]);
+  }, [nameValid, pwValid, pwConfirmValid]);
 
   return (
     <div className='myPage-wrap'>
@@ -91,14 +96,13 @@ function MyPage() {
             <input
               type='text'
               className='input'
-              placeholder='이름을 입력해주세요.'
               value={name}
               onChange={handleName}
             />
           </div>
 
           <div className='errorMessage-wrap'>
-            {!nameValid && name.length > 0 && (
+            {!nameValid && name && name.length < 2 && (
               <div>이름은 2글자 이상 입력해주세요.</div>
             )}
           </div>
@@ -109,16 +113,9 @@ function MyPage() {
             <input
               type='text'
               className='input'
-              placeholder='E-mail을 입력해주세요.'
-              value={email}
-              onChange={handleEmail}
+              value={decodedToken?.email}
+              readOnly={true}
             />
-          </div>
-
-          <div className='errorMessage-wrap'>
-            {!emailValid && email.length > 0 && (
-              <div>올바른 E-Mail을 입력해주세요.</div>
-            )}
           </div>
 
           <div className='input-title'>Password</div>
