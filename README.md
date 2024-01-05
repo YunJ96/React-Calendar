@@ -10,7 +10,7 @@
 <br />
 
 ### 📌 개발 목표
-Redux-Toolkit과 Express의 이해
+Redux-Toolkit과 Express의 이해 <br />
 React 컴포넌트와 TypeScript 숙달
 
 <br />
@@ -29,7 +29,7 @@ React 컴포넌트와 TypeScript 숙달
 ### Front-end
 <div>
 <img src="https://github.com/yewon-Noh/readme-template/blob/main/skills/React.png?raw=true" width="80">
-<img src="https://github.com/yewon-Noh/readme-template/blob/main/skills/Redux-toolkit.png?raw=true" width="80">
+<img src="https://github.com/yewon-Noh/readme-template/blob/main/skills/Redux.png?raw=true" width="80">
 <img src="https://github.com/yewon-Noh/readme-template/blob/main/skills/TypeScript.png?raw=true" width="80">
 <img src="https://github.com/yewon-Noh/readme-template/blob/main/skills/Axios.png?raw=true" width="80">
 <img src="https://github.com/yewon-Noh/readme-template/blob/main/skills/JWT.png?raw=true" width="80">
