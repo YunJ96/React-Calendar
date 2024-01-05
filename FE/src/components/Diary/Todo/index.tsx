@@ -1,3 +1,5 @@
+// Todo.tsx
+
 import React, { useEffect, useState } from 'react';
 import './styles.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -27,6 +29,7 @@ function Todo({ formattedDate, closeTodo, handleCloseTodo }: TodoProps) {
 
   const handleCloseBtn = () => {
     handleCloseTodo();
+    setTodoList([]);
   };
 
   const fetchTodoList = async () => {
@@ -46,10 +49,12 @@ function Todo({ formattedDate, closeTodo, handleCloseTodo }: TodoProps) {
             fetchedData.todoList.map((item: string, index: number) => ({
               isCompleted: fetchedData.completed[index],
               value: item,
+              id: index,
             }))
           );
         } else {
           console.log(fetchedData);
+          setTodoList([]);
         }
       }
     } catch (error) {
@@ -58,19 +63,22 @@ function Todo({ formattedDate, closeTodo, handleCloseTodo }: TodoProps) {
   };
 
   useEffect(() => {
-    fetchTodoList();
-  }, [formattedDate]);
+    if (!closeTodo) {
+      fetchTodoList();
+    }
+  }, [formattedDate, closeTodo]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const token = localStorage.getItem('accessToken');
 
-    if (inputValue.length === 0) {
-      alert('Todo를 작성해주세요.');
-    } else if (inputValue.length < 11) {
-      try {
-        const token = localStorage.getItem('accessToken');
-
-        if (token !== null) {
+    if (!token) {
+      alert('로그인 후 이용가능한 서비스입니다.');
+    } else {
+      if (inputValue.length === 0) {
+        alert('Todo를 작성해주세요.');
+      } else if (inputValue.length < 11) {
+        try {
           const decodedToken = jwtDecode<JwtPayload>(token);
 
           const response = await todoApi.createTodo(
@@ -90,15 +98,15 @@ function Todo({ formattedDate, closeTodo, handleCloseTodo }: TodoProps) {
               value: inputValue,
             },
           ]);
+        } catch (error) {
+          console.log(error);
         }
-      } catch (error) {
-        console.log(error);
+      } else {
+        alert('10글자 이내로 작성해주세요.');
       }
-    } else {
-      alert('10글자 이내로 작성해주세요.');
-    }
 
-    setInputValue('');
+      setInputValue('');
+    }
   };
 
   const handleCompleteClick = async (index: number) => {

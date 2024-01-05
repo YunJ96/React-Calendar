@@ -9,7 +9,20 @@ function Home() {
       <span>당신의 할 일, 저희가 도와드릴게요.</span>{' '}
       <span>일상의 작은 목표부터 큰 계획까지.</span>{' '}
       <span>나만의 투두리스트로 일상을 더 효율적으로 관리하세요.</span>{' '}
-      <button onClick={() => navigate('/diary')}>시작하기</button>
+      <button
+        onClick={() => {
+          const token = localStorage.getItem('accessToken');
+          if (token) {
+            navigate('/diary');
+          } else {
+            if (window.confirm('회원가입 페이지로 이동하시겠습니까?')) {
+              navigate('/join');
+            }
+          }
+        }}
+      >
+        시작하기
+      </button>
     </div>
   );
 }
