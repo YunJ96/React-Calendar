@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import todoApi from '../../../api/todoApi';
+import { jwtDecode } from 'jwt-decode';
+
+interface JwtPayload {
+  email: string;
+}
 
 interface TodoItem {
   id: number;
@@ -10,11 +16,12 @@ interface TodoItem {
 }
 
 interface TodoProps {
+  formattedDate: string;
   closeTodo: boolean;
   handleCloseTodo: () => void;
 }
 
-function Todo({ closeTodo, handleCloseTodo }: TodoProps) {
+function Todo({ formattedDate, closeTodo, handleCloseTodo }: TodoProps) {
   const [todoList, setTodoList] = useState<TodoItem[]>([]);
   const [inputValue, setInputValue] = useState('');
 
@@ -22,20 +29,71 @@ function Todo({ closeTodo, handleCloseTodo }: TodoProps) {
     handleCloseTodo();
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const fetchTodoList = async () => {
+    try {
+      const token = localStorage.getItem('accessToken');
+
+      if (token !== null) {
+        const decodedToken = jwtDecode<JwtPayload>(token);
+
+        const fetchedData = await todoApi.getTodo(
+          decodedToken.email,
+          formattedDate
+        );
+
+        if (Array.isArray(fetchedData?.todoList)) {
+          setTodoList(
+            fetchedData.todoList.map((item: string, index: number) => ({
+              isCompleted: fetchedData.completed[index],
+              value: item,
+            }))
+          );
+        } else {
+          console.log(fetchedData);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTodoList();
+  }, [formattedDate]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (inputValue.length === 0) {
       alert('Todo를 작성해주세요.');
     } else if (inputValue.length < 11) {
-      setTodoList((current) => [
-        ...current,
-        {
-          id: new Date().getTime(),
-          isCompleted: false,
-          value: inputValue,
-        },
-      ]);
+      try {
+        const token = localStorage.getItem('accessToken');
+
+        if (token !== null) {
+          const decodedToken = jwtDecode<JwtPayload>(token);
+
+          const response = await todoApi.createTodo(
+            decodedToken.email,
+            formattedDate,
+            [inputValue],
+            [false]
+          );
+
+          console.log(response);
+
+          setTodoList((current) => [
+            ...current,
+            {
+              id: new Date().getTime(),
+              isCompleted: false,
+              value: inputValue,
+            },
+          ]);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       alert('10글자 이내로 작성해주세요.');
     }
@@ -43,20 +101,48 @@ function Todo({ closeTodo, handleCloseTodo }: TodoProps) {
     setInputValue('');
   };
 
-  const handleCompleteClick = (index: number) => {
-    setTodoList((current) => {
-      const newTodoList = [...current];
-      newTodoList[index].isCompleted = true;
-      return newTodoList;
-    });
+  const handleCompleteClick = async (index: number) => {
+    try {
+      const token = localStorage.getItem('accessToken');
+
+      if (token !== null) {
+        const decodedToken = jwtDecode<JwtPayload>(token);
+
+        await todoApi.completeStatusUpdateTodo(
+          decodedToken.email,
+          formattedDate,
+          index
+        );
+      }
+
+      setTodoList((current) => {
+        const newTodoList = [...current];
+        newTodoList[index].isCompleted = true;
+        return newTodoList;
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleRemoveClick = (index: number) => {
-    setTodoList((current) => {
-      const newTodoList = [...current];
-      newTodoList.splice(index, 1);
-      return newTodoList;
-    });
+  const handleRemoveClick = async (index: number) => {
+    try {
+      const token = localStorage.getItem('accessToken');
+
+      if (token !== null) {
+        const decodedToken = jwtDecode<JwtPayload>(token);
+
+        await todoApi.deleteTodo(decodedToken.email, formattedDate, index);
+      }
+
+      setTodoList((current) => {
+        const newTodoList = [...current];
+        newTodoList.splice(index, 1);
+        return newTodoList;
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -69,27 +155,31 @@ function Todo({ closeTodo, handleCloseTodo }: TodoProps) {
       />
       <div className='todo-list-wrap'>
         <ol id='todo-list'>
-          {todoList.map((item, index) => (
-            <li key={item.id} className={item.isCompleted ? 'completed' : ''}>
-              <span>{item.value}</span>
-              <div className='todo-buttons'>
-                <button
-                  id='todo-complete-button'
-                  className='todo-button'
-                  onClick={() => handleCompleteClick(index)}
-                >
-                  완료
-                </button>
-                <button
-                  id='todo-delete-button'
-                  className='todo-button'
-                  onClick={() => handleRemoveClick(index)}
-                >
-                  삭제
-                </button>
-              </div>
-            </li>
-          ))}
+          {Array.isArray(todoList) ? (
+            todoList.map((item, index) => (
+              <li key={item.id} className={item.isCompleted ? 'completed' : ''}>
+                <span>{item.value}</span>
+                <div className='todo-buttons'>
+                  <button
+                    id='todo-complete-button'
+                    className='todo-button'
+                    onClick={() => handleCompleteClick(index)}
+                  >
+                    완료
+                  </button>
+                  <button
+                    id='todo-delete-button'
+                    className='todo-button'
+                    onClick={() => handleRemoveClick(index)}
+                  >
+                    삭제
+                  </button>
+                </div>
+              </li>
+            ))
+          ) : (
+            <p>No todo items available.</p>
+          )}
         </ol>
       </div>
       <form id='create-todo' onSubmit={handleSubmit}>

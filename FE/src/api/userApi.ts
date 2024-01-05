@@ -1,12 +1,11 @@
 import axios from 'axios';
+const url = `http://${process.env.REACT_APP_URL}:${process.env.REACT_APP_BE_PORT}/api/user/`;
 
 const userApi = {
   join: async (name: string, email: string, password: string) => {
-    const url = `http://${process.env.REACT_APP_URL}:${process.env.REACT_APP_BE_PORT}/api/user/register`;
-
     try {
       const response = await axios.post(
-        url,
+        url + 'register',
         {
           name: name,
           email: email,
@@ -26,11 +25,9 @@ const userApi = {
     }
   },
   login: async (email: string, password: string) => {
-    const url = `http://${process.env.REACT_APP_URL}:${process.env.REACT_APP_BE_PORT}/api/user/login`;
-
     try {
       const response = await axios.post(
-        url,
+        url + 'login',
         {
           email: email,
           password: password,
@@ -54,12 +51,11 @@ const userApi = {
     }
   },
   update: async (name: string, email: string, password: string) => {
-    const url = `http://${process.env.REACT_APP_URL}:${process.env.REACT_APP_BE_PORT}/api/user/update`;
     const token = localStorage.getItem('accessToken');
 
     try {
       const response = await axios.patch(
-        url,
+        url + 'update',
         {
           name: name,
           email: email,

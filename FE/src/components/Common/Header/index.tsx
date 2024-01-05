@@ -56,12 +56,12 @@ function Header() {
           <span
             className='header__nav'
             onClick={() => {
-              // const token = localStorage.getItem('accessToken');
-              // if (token) {
-              navigate('/myPage');
-              // } else {
-              //   alert('로그인 후 이용가능한 서비스입니다.');
-              // }
+              const token = localStorage.getItem('accessToken');
+              if (token) {
+                navigate('/myPage');
+              } else {
+                alert('로그인 후 이용가능한 서비스입니다.');
+              }
             }}
           >
             My Page

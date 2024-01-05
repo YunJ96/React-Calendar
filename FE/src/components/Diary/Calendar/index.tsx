@@ -5,10 +5,16 @@ import dayjs from 'dayjs';
 import './styles.scss';
 
 interface DiaryProps {
-  onDateClick: (date: Date) => void;
+  onDateClick: (date: Date, formattedDate: string) => void;
 }
 
 function Diary({ onDateClick }: DiaryProps) {
+  const handleDateClick = (date: Date) => {
+    const formattedDate = dayjs(date).format('YYYY-MM-DD');
+    console.log(formattedDate);
+    onDateClick(date, formattedDate);
+  };
+
   return (
     <div className='calendar-wrap'>
       <Calendar
@@ -18,7 +24,7 @@ function Diary({ onDateClick }: DiaryProps) {
         next2Label={null}
         prev2Label={null}
         formatDay={(locale, date) => dayjs(date).format('D')}
-        onClickDay={onDateClick}
+        onClickDay={handleDateClick}
       />
     </div>
   );
