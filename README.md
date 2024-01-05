@@ -9,9 +9,9 @@
 
 <br />
 
-### 📌 목표
-1. Redux-Toolkit과 Express의 이해
-2. React 컴포넌트와 TypeScript 숙달
+### 📌 개발 목표
+Redux-Toolkit과 Express의 이해
+React 컴포넌트와 TypeScript 숙달
 
 <br />
 
