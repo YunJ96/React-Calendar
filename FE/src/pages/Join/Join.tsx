@@ -95,7 +95,7 @@ function Join() {
   }, [nameValid, emailValid, pwValid, pwConfirmValid]);
 
   return (
-    <div className='page'>
+    <article className='page'>
       <div className='title-wrap'>Join Us!</div>
 
       <form action='submit' onSubmit={handleSubmit}>
@@ -185,7 +185,7 @@ function Join() {
           </button>
         </div>
       </form>
-    </div>
+    </article>
   );
 }
 

@@ -1,5 +1,3 @@
-// Diary.tsx
-
 import React, { useState } from 'react';
 import SideNav from '../../components/Common/Side';
 import Calendar from '../../components/Diary/Calendar';
@@ -26,7 +24,7 @@ function Diary() {
   };
 
   return (
-    <div>
+    <article>
       <div className='diary-wrap'>
         <SideNav />
         <Calendar onDateClick={handleDateClick} />
@@ -38,7 +36,7 @@ function Diary() {
           />
         )}
       </div>
-    </div>
+    </article>
   );
 }
 

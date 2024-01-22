@@ -24,7 +24,7 @@ function SideNav() {
   }, [dispatch]);
 
   return (
-    <div className='side-content'>
+    <aside className='side-content'>
       <div className='sideNav'>
         <div className='side-image'>
           {user && user.name !== undefined ? (
@@ -53,7 +53,7 @@ function SideNav() {
           )}
         </div>
       </div>
-    </div>
+    </aside>
   );
 }
 

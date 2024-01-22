@@ -1,5 +1,3 @@
-// Todo.tsx
-
 import React, { useEffect, useState } from 'react';
 import './styles.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -154,7 +152,7 @@ function Todo({ formattedDate, closeTodo, handleCloseTodo }: TodoProps) {
   };
 
   return (
-    <div className={`todo ${closeTodo ? 'disabled' : ''}`}>
+    <aside className={`todo ${closeTodo ? 'disabled' : ''}`}>
       <span id='todo-title'>To-Do List</span>
       <FontAwesomeIcon
         icon={faTimes}
@@ -203,7 +201,7 @@ function Todo({ formattedDate, closeTodo, handleCloseTodo }: TodoProps) {
           등록
         </button>
       </form>
-    </div>
+    </aside>
   );
 }
 

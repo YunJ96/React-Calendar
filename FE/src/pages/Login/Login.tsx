@@ -50,7 +50,7 @@ function Login() {
   }, [emailValid, pwValid]);
 
   return (
-    <div className='page'>
+    <article className='page'>
       <div className='title-wrap'>Welcome!</div>
 
       <div className='content-wrap'>
@@ -110,7 +110,7 @@ function Login() {
           Join
         </button>
       </div>
-    </div>
+    </article>
   );
 }
 

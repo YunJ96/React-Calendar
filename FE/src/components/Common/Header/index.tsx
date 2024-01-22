@@ -32,7 +32,6 @@ function Header() {
 
     if (token) {
       const decodedToken = jwtDecode(token);
-      console.log(decodedToken);
       dispatch(login(decodedToken));
     } else {
       dispatch(login('로그인을 해주세요!'));
@@ -44,16 +43,16 @@ function Header() {
   };
 
   return (
-    <div>
+    <header>
       <nav className='header'>
         <div className='header__navs'>
-          <span className='header__nav' onClick={() => navigate('/')}>
+          <li className='header__nav' onClick={() => navigate('/')}>
             Home
-          </span>
-          <span className='header__nav' onClick={() => navigate('/diary')}>
+          </li>
+          <li className='header__nav' onClick={() => navigate('/diary')}>
             Calendar
-          </span>
-          <span
+          </li>
+          <li
             className='header__nav'
             onClick={() => {
               const token = localStorage.getItem('accessToken');
@@ -65,8 +64,8 @@ function Header() {
             }}
           >
             My Page
-          </span>
-          <div className='header__nav'>
+          </li>
+          <li className='header__nav'>
             {
               <div>
                 <span>
@@ -80,10 +79,10 @@ function Header() {
                 <span>{weather}</span>
               </div>
             }
-          </div>
+          </li>
         </div>
       </nav>
-    </div>
+    </header>
   );
 }
 
