@@ -64,11 +64,11 @@ button:disabled {
   padding: 16px;
   margin-top: 8px;
   background-color: white;
-  border: 1px solid #fffade;
+  border: 1px solid #e2e0e0;
 }
 
 .input-wrap:focus-within {
-  border: 1px solid #e2e0e0;
+  border: 1px solid;
 }
 
 .input {

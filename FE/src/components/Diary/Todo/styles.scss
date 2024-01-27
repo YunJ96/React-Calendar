@@ -65,15 +65,15 @@
 }
 
 #todo-delete-button {
+  font-size: 13px;
   margin: 0 5px 0 1px;
-  font-weight: bold;
   border: solid 1px #333333;
 }
 
 #todo-complete-button,
 #todo-button {
-  font-weight: bold;
+  font-size: 13px;
   border: solid 1px #333333;
-  background-color: 333333;
+  background-color: #333333;
   color: white;
 }
